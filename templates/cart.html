@@ -1,7 +1,7 @@
 
 {% extends 'base.html'%}
 {% load static %}
-
+{% load custom_tags %}
 
 {% block css %}
     <!-- Google Web Fonts -->
@@ -100,7 +100,7 @@
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
             <h1 class="font-weight-semi-bold text-uppercase mb-3">Shopping Cart</h1>
             <div class="d-inline-flex">
-                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0"><a href="/">Home</a></p>
                 <p class="m-0 px-2">-</p>
                 <p class="m-0">Shopping Cart</p>
             </div>
@@ -117,6 +117,7 @@
                     <thead class="bg-secondary text-dark">
                         <tr>
                             <th>Products</th>
+                            <th>Name</th>
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Total</th>
@@ -124,111 +125,120 @@
                         </tr>
                     </thead>
                     <tbody class="align-middle">
-                        <tr>
-                            <td class="align-middle"><img src="{% static 'img/product-1.jpg'%}" alt="" style="width: 50px;"> Colorful Stylish Shirt</td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
+                        {% for product in products %}
+                            <tr>
+                                <td class="align-middle"><img src="{{ product.image.url }}" alt="" style="width: 50px;"></td>
+                                <td class="align-middle">{{ product.name }}</td>
+                                <td class="align-middle">{{ product.price }}</td>
+                                <td class="align-middle">
+                                    <div class="input-group quantity mx-auto" style="width: 100px;">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary btn-minus" onclick="decrement({{ product.id }})">
+                                            <i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                        <input type="text" class="form-control text-center quantity-amount" value="{{ product.count }}" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary btn-plus" onclick="increment({{ product.id }})">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle"><img src="{% static 'img/product-2.jpg'%}" alt="" style="width: 50px;"> Colorful Stylish Shirt</td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle"><img src="{% static 'img/product-3.jpg'%}" alt="" style="width: 50px;"> Colorful Stylish Shirt</td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle"><img src="{% static 'img/product-4.jpg'%}" alt="" style="width: 50px;"> Colorful Stylish Shirt</td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle"><img src="{% static 'img/product-5.jpg'%}" alt="" style="width: 50px;"> Colorful Stylish Shirt</td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
-                        </tr>
+                                </td>
+                                <td class="align-middle">${% total_price product.price product.count %}</td>
+                                <td class="align-middle">
+                                    <form method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value="{{ product.id }}">
+                                    <button class="btn btn-sm btn-primary " type="submit">X</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+{#                        <tr>#}
+{#                            <td class="align-middle"><img src="{% static 'img/product-2.jpg'%}" alt="" style="width: 50px;"> Colorful Stylish Shirt</td>#}
+{#                            <td class="align-middle">$150</td>#}
+{#                            <td class="align-middle">#}
+{#                                <div class="input-group quantity mx-auto" style="width: 100px;">#}
+{#                                    <div class="input-group-btn">#}
+{#                                        <button class="btn btn-sm btn-primary btn-minus" >#}
+{#                                        <i class="fa fa-minus"></i>#}
+{#                                        </button>#}
+{#                                    </div>#}
+{#                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">#}
+{#                                    <div class="input-group-btn">#}
+{#                                        <button class="btn btn-sm btn-primary btn-plus">#}
+{#                                            <i class="fa fa-plus"></i>#}
+{#                                        </button>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </td>#}
+{#                            <td class="align-middle">$150</td>#}
+{#                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>#}
+{#                        </tr>#}
+{#                        <tr>#}
+{#                            <td class="align-middle"><img src="{% static 'img/product-3.jpg'%}" alt="" style="width: 50px;"> Colorful Stylish Shirt</td>#}
+{#                            <td class="align-middle">$150</td>#}
+{#                            <td class="align-middle">#}
+{#                                <div class="input-group quantity mx-auto" style="width: 100px;">#}
+{#                                    <div class="input-group-btn">#}
+{#                                        <button class="btn btn-sm btn-primary btn-minus" >#}
+{#                                        <i class="fa fa-minus"></i>#}
+{#                                        </button>#}
+{#                                    </div>#}
+{#                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">#}
+{#                                    <div class="input-group-btn">#}
+{#                                        <button class="btn btn-sm btn-primary btn-plus">#}
+{#                                            <i class="fa fa-plus"></i>#}
+{#                                        </button>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </td>#}
+{#                            <td class="align-middle">$150</td>#}
+{#                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>#}
+{#                        </tr>#}
+{#                        <tr>#}
+{#                            <td class="align-middle"><img src="{% static 'img/product-4.jpg'%}" alt="" style="width: 50px;"> Colorful Stylish Shirt</td>#}
+{#                            <td class="align-middle">$150</td>#}
+{#                            <td class="align-middle">#}
+{#                                <div class="input-group quantity mx-auto" style="width: 100px;">#}
+{#                                    <div class="input-group-btn">#}
+{#                                        <button class="btn btn-sm btn-primary btn-minus" >#}
+{#                                        <i class="fa fa-minus"></i>#}
+{#                                        </button>#}
+{#                                    </div>#}
+{#                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">#}
+{#                                    <div class="input-group-btn">#}
+{#                                        <button class="btn btn-sm btn-primary btn-plus">#}
+{#                                            <i class="fa fa-plus"></i>#}
+{#                                        </button>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </td>#}
+{#                            <td class="align-middle">$150</td>#}
+{#                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>#}
+{#                        </tr>#}
+{#                        <tr>#}
+{#                            <td class="align-middle"><img src="{% static 'img/product-5.jpg'%}" alt="" style="width: 50px;"> Colorful Stylish Shirt</td>#}
+{#                            <td class="align-middle">$150</td>#}
+{#                            <td class="align-middle">#}
+{#                                <div class="input-group quantity mx-auto" style="width: 100px;">#}
+{#                                    <div class="input-group-btn">#}
+{#                                        <button class="btn btn-sm btn-primary btn-minus" >#}
+{#                                        <i class="fa fa-minus"></i>#}
+{#                                        </button>#}
+{#                                    </div>#}
+{#                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">#}
+{#                                    <div class="input-group-btn">#}
+{#                                        <button class="btn btn-sm btn-primary btn-plus">#}
+{#                                            <i class="fa fa-plus"></i>#}
+{#                                        </button>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </td>#}
+{#                            <td class="align-middle">$150</td>#}
+{#                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>#}
+{#                        </tr>#}
                     </tbody>
                 </table>
             </div>
@@ -280,7 +290,29 @@
     <!-- Contact Javascript File -->
     <script src="{% static 'mail/jqBootstrapValidation.min.js'%}"></script>
     <script src="{% static 'mail/contact.js'%}"></script>
+    <script>
+         const increment = (id) => {
+             fetch('http://127.0.0.1:8000/increment-count', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: id,
 
+                })
+             }).then(rsp=>rsp.json()).then(response=>console.log(response))
+         }
+         const decrement = (id) => {
+             fetch('http://127.0.0.1:8000/decrement-count', {
+                method: 'POST',
+                body: JSON.stringify({
+                    id: id,
+
+                })
+             }).then(rsp=>rsp.json()).then(response=>console.log(response))
+         }
+    </script>
     <!-- Template Javascript -->
     <script src="{% static 'js/main.js'%}"></script>
 {% endblock %}
